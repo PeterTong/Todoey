@@ -17,13 +17,11 @@ class TodoListViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
-//		if let item = defaults.array(forKey: "TodoListArray") as? [String] {
-//			itemArray = item
-//		}
+//
 		
 		let newItem = Item()
 		newItem.title = "Find Mike"
-		newItem.done = true
+		
 		itemArray.append(newItem)
 		
 		
@@ -34,6 +32,10 @@ class TodoListViewController: UITableViewController {
 		let newItem3 = Item()
 		newItem3.title = "Destory Demogorgon"
 		itemArray.append(newItem3)
+		
+		if let item = defaults.array(forKey: "TodoListArray") as? [Item] {
+			itemArray = item
+		}
 	}
 	
 	// MARK: TableView Datasource Methods
