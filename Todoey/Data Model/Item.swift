@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Item {
+class Item: Codable {
+	
+	// Conform the Encodable protocol, all of its properties must have standard data types
 	
 	var title: String = ""
 	var done: Bool = false
