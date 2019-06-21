@@ -152,9 +152,7 @@ extension TodoListViewController: UISearchBarDelegate{
     }
   }
   
-  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    <#code#>
-  }
+  
   
   
   
