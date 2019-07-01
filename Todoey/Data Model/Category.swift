@@ -13,4 +13,6 @@ class Category: Object {
 	@objc dynamic var name: String = ""
 	let items = List<Item>()
 //	let array: Array<Int> = [1,2,3]
+	
+	@objc dynamic var colour: String = ""
 }
