@@ -8,11 +8,14 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class TodoListViewController: SwipeTableViewController {
 	
 	var todoItems: Results<Item>?
 	let realm = try! Realm()
+	
+	@IBOutlet weak var searchBar: UISearchBar!
 	
 	var selectedCategory: Category? {
 		didSet{
@@ -25,11 +28,43 @@ class TodoListViewController: SwipeTableViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
+//		print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
 		
-		print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+		tableView.separatorStyle = .none
+		
+	
 		
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		guard let colourHex = selectedCategory?.colour else{fatalError()}
+		
+		title = selectedCategory?.name
+		
+		updateNavBar(withHexCode: colourHex)
+		
+	}
+  
+  
+  override func viewWillDisappear(_ animated: Bool) {
+   
+    updateNavBar(withHexCode: "1D9BF6")
+  }
+  
+  // MARK: - Nav bar Setup Methods
+  func updateNavBar(withHexCode colourHexCode: String){
+    guard let navBar = navigationController?.navigationBar else{fatalError("Navigation controller does not exits.")}
+    
+    guard let navBarColour = UIColor(hexString: colourHexCode) else {fatalError()}
+    navBar.barTintColor = navBarColour
+    navBar.tintColor = ContrastColorOf(navBarColour, returnFlat: true)
+    
+    navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColour, returnFlat: true)]
+    
+    searchBar.barTintColor = navBarColour
+    
+  }
 	
 	// MARK: TableView Datasource Methods
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +82,22 @@ class TodoListViewController: SwipeTableViewController {
 			// value = condition ? valueIfTrue : valueIfFalse
 			
 			cell.accessoryType = item.done ? .checkmark : .none
+			
+			
+			if let colour = UIColor(hexString: self.selectedCategory!.colour)?.darken(byPercentage:
+				// currently on row #1
+				// there's a total of 10 items in todoItems
+				CGFloat(indexPath.row) / CGFloat(todoItems!.count)
+				){
+				
+				cell.backgroundColor = colour
+				cell.textLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
+				
+			}
+			
+//			print("version 1: \(CGFloat(indexPath.row / todoItems!.count))")
+//			print("version 2: \(CGFloat(indexPath.row) / CGFloat(todoItems!.count))")
+			
 		}else{
 			cell.textLabel?.text = "No Items Added"
 		}

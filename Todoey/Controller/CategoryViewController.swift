@@ -26,6 +26,12 @@ class CategoryViewController: SwipeTableViewController {
 		tableView.separatorStyle = .none
 		
 	}
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(UIColor(hexString: "1D9BF6")! , returnFlat: true)]
+  }
 	
 	// MARK: - TableView Delegate Methods
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,10 +56,19 @@ class CategoryViewController: SwipeTableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = super.tableView(tableView, cellForRowAt: indexPath)
+    
+    if let category = categories?[indexPath.row]{
+      
+      cell.textLabel?.text = category.name
+      
+      guard let categoryColour = UIColor(hexString: category.colour) else {fatalError()}
+      
+      cell.backgroundColor = categoryColour
+      
+      cell.textLabel?.textColor = ContrastColorOf(categoryColour, returnFlat: true)
+    }
 
-		cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added Yet"
 		
-		cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].colour ?? "1D9BF6")
 		
 		return cell
 		

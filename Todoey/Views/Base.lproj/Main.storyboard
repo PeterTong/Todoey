@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todoey-->
+        <!--Items-->
         <scene sceneID="dNO-ZG-ihJ">
             <objects>
                 <tableViewController id="t2H-No-iIa" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -40,14 +40,16 @@
                             <outlet property="delegate" destination="t2H-No-iIa" id="hyo-ZY-LU1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="Le8-ED-4Lf">
+                    <navigationItem key="navigationItem" title="Items" id="Le8-ED-4Lf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="F8R-1N-jLW">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="t2H-No-iIa" id="5Zj-2G-rg3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="1Ql-6d-rjI" id="kPH-0N-iIH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6Z-5O-WWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -58,8 +60,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="txS-F6-dGX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="whB-z5-xcF">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="whB-z5-xcF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -75,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="305.79710144927537" y="150.66964285714286"/>
         </scene>
-        <!--Category View Controller-->
+        <!--Todoey-->
         <scene sceneID="LJQ-Os-zrU">
             <objects>
                 <tableViewController id="Feo-qP-xwQ" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,7 +100,7 @@
                             <outlet property="delegate" destination="Feo-qP-xwQ" id="Gwb-hM-R4Z"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mcF-45-x0x">
+                    <navigationItem key="navigationItem" title="Todoey" id="mcF-45-x0x">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="y90-tH-P04">
                             <connections>
                                 <action selector="addButtonItem:" destination="Feo-qP-xwQ" id="484-o6-5NJ"/>
